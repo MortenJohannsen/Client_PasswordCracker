@@ -20,7 +20,9 @@ namespace TCPEchoClient
 
             
 
-            const string sendPW = "per:AXPaVO/3DmqNsW2uPJw9ZJxf9lc=";
+            const string sendPW = "anders:5en6G6MezRroT3XKqkdPOmY/BfQ=#peter:qmz4syDsnnyBP+NQeqczRv/kJP4=#michael:rIFGj9xqLUA0T0J8xiGCuMlfnvM=#vibeke:EQ91A67FOpjss4uW8kV570lnSa0=#lars:7qrnVFEkYcp7tQyKQfnwOP1X4SI=#poul:94roVc1d8UZEtbK9LBF3vuo0wkg=#susanne:00kp1+AcZSNJemn40Yew+bOI5XQ=#per:AXPaVO/3DmqNsW2uPJw9ZJxf9lc=";
+            string[] PWarray = sendPW.Split('#');
+
             string[] ipArray = new string[5];
 
             ipArray.SetValue("10.154.2.115", 0);
@@ -49,7 +51,7 @@ namespace TCPEchoClient
             Console.WriteLine(" --- Press Enter to Crack Passwords ---");
             Console.ReadLine();
 
-            Thread thread3 = new Thread(() => doit.DoItMethod(sendPW, ipArray.GetValue(0).ToString()));
+            Thread thread3 = new Thread(() => doit.DoItMethod(PWarray, ipArray.GetValue(0).ToString()));
             //Thread thread4 = new Thread(() => doit.DoItMethod(sendPW, ipArray.GetValue(1).ToString()));
             thread3.Start();
             //thread4.Start();

@@ -12,7 +12,7 @@ namespace TCPEchoClient
     {
         private string[] dictionaryArray = new string[50000];
 
-        public void DoItMethod(string sendPW, string ip)
+        public void DoItMethod(string[] PWarray, string ip)
         {
             TcpClient clientSocket = new TcpClient(ip, 65080);
             Stream ns = clientSocket.GetStream(); //provides a Stream
@@ -22,8 +22,18 @@ namespace TCPEchoClient
 
             
 
-            string message = sendPW;
-            sw.WriteLine(message);
+            foreach (var s in PWarray)
+            {
+                try
+                {
+                    sw.WriteLine(s);
+                }
+                catch (Exception ex) { Console.WriteLine("fejl" + ex);
+                    break;
+                }
+                sw.Flush();
+            }
+            
 
 
             Task<string> reading = sr.ReadLineAsync();
