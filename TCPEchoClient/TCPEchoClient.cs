@@ -18,14 +18,13 @@ namespace TCPEchoClient
         {
             DoIt doit = new DoIt();
 
-            //Tester
-            doit.GetAndSplitDictionary();
+            
 
-            const string sendPW = "vibeke:EQ91A67FOpjss4uW8kV570lnSa0=";
+            const string sendPW = "per:AXPaVO/3DmqNsW2uPJw9ZJxf9lc=";
             string[] ipArray = new string[5];
 
-            ipArray.SetValue("10.154.1.247", 0);
-            ipArray.SetValue("10.154.1.254", 1);
+            ipArray.SetValue("10.154.2.115", 0);
+            ipArray.SetValue("10.154.1.217", 1);
 
             Console.WriteLine("Client-Server Chat Application");
             Console.Write("Choose chat name: ");
@@ -39,12 +38,23 @@ namespace TCPEchoClient
             Console.ReadLine();
 
 
-            Thread thread1 = new Thread(() => doit.DoItMethod(sendPW, ipArray.GetValue(0).ToString()));
-            Thread thread2 = new Thread(() => doit.DoItMethod(sendPW, ipArray.GetValue(1).ToString()));
+            Thread thread1 = new Thread(() => doit.GetAndSplitDictionary(ipArray.GetValue(0).ToString(), 1));
+            //Thread thread2 = new Thread(() => doit.GetAndSplitDictionary(ipArray.GetValue(1).ToString(), 2));
             thread1.Start();
-            thread2.Start();
+            //thread2.Start();
             thread1.Join();
-            thread2.Join();
+            //thread2.Join();
+
+            Console.WriteLine(" --- Dictionaries Sent\n ---");
+            Console.WriteLine(" --- Press Enter to Crack Passwords ---");
+            Console.ReadLine();
+
+            Thread thread3 = new Thread(() => doit.DoItMethod(sendPW, ipArray.GetValue(0).ToString()));
+            //Thread thread4 = new Thread(() => doit.DoItMethod(sendPW, ipArray.GetValue(1).ToString()));
+            thread3.Start();
+            //thread4.Start();
+            thread3.Join();
+            //thread4.Join();
 
             Console.WriteLine("...Done...");
             Console.ReadLine();
